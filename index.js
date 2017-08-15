@@ -29,7 +29,7 @@ const bodychecker = (failedCallback, fieldOption) => {
         const body = req.body
         for (let fieldname in fieldOption) {
             const checker = fieldOption[fieldname]
-            const result = !checker(body, fieldname)
+            const result = checker(body, fieldname)
             if (!_.isNull(result)) {
                 return failedCallback(req, res, next, fieldname, result)
             }
