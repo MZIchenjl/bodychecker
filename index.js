@@ -30,7 +30,7 @@ const bodychecker = (failedCallback, fieldOption) => {
         for (let fieldname in fieldOption) {
             const checker = fieldOption[fieldname]
             if (!checker(body, fieldname)) {
-                return failedCallback(req, res, fieldname, body)
+                return failedCallback(req, res, next, fieldname, body[fieldname])
             }
         }
         next()
