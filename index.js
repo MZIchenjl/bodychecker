@@ -7,11 +7,11 @@ const ERROR = (name, message) => {
     return err
 }
 
-const defaultCallback = (req, res, next, fieldname, fieldvalue) => {
+const defaultCallback = (req, res, next, fieldname, result) => {
     req.status(400)
     return res.json({
         code: 400,
-        message: `Invalid type in the body, field ${fieldname}, value ${fieldvalue}.`
+        message: `Invalid type in the body, field ${fieldname}, result ${result}.`
     })
 }
 
@@ -29,8 +29,9 @@ const bodychecker = (failedCallback, fieldOption) => {
         const body = req.body
         for (let fieldname in fieldOption) {
             const checker = fieldOption[fieldname]
-            if (!checker(body, fieldname)) {
-                return failedCallback(req, res, next, fieldname, body[fieldname])
+            const result = !checker(body, fieldname)
+            if (!_.isNull(result)) {
+                return failedCallback(req, res, next, fieldname, result)
             }
         }
         next()
