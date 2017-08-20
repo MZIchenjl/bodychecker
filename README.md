@@ -38,7 +38,7 @@ var FieldTypes = require('bodychecker').FieldTypes;
 ## Example Usage
 
 ```js
-const _bc = require('bodychecker');
+var _bc = require('bodychecker');
 var FieldTypes = require('bodychecker').FieldTypes;
 
 var bodychecker = _bc.failed(function(req, res, next, fieldname, result) {
