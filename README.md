@@ -1,5 +1,7 @@
 # Bodychecker
 
+[![npm version](https://img.shields.io/npm/v/bodychecker.svg)](https://www.npmjs.com/package/bodychecker)
+
 Bodychecker is a express middleware for handling `req.body`, which is used to validate the value in the body like the React Proptypes way.
 
 # Installation
@@ -57,7 +59,7 @@ All supported types:
 
 * `shapeof`(_optional_`isRequired`) `obeject` of  `function` argument required, e.g `shapeof({ title: bodychecker.string })`
 
-Object `req.$bcResult`
+Object "req.$bcResult"
 
 ```javascript
 {
@@ -75,9 +77,9 @@ Otherwise, You can also add custom checker.
 ```javascript
 /**
  * customChecker
- * @param {object} - the req.body object
+ * @param {object} body - the req.body object
  * @param {string} fieldname - the field name
- * @return {object|null} result - the result
+ * @return {object|null} - the result
  */
 function customChecker(body, fieldname) {
     // make sure this function can return with result or null
