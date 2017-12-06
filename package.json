@@ -1,6 +1,6 @@
 {
     "name": "bodychecker",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "description": "A middleware for express.js to check the request body.",
     "main": "index.js",
     "scripts": {
