@@ -1,45 +1,46 @@
-import _ from 'lodash'
-import FieldTypes from './lib/typechecker'
+const _ = require('lodash'),
+  fieldTypes = require('./lib/typechecker')
 
-const ERROR = (name, message) => {
-    const err = new Error(message)
-    err.name = name
-    return err
+const bodyChecker = function (fieldTypeCheckers) {
+  return (req, res, next) => {
+    let result = null
+    req.$bcResult = null
+    if (!_.isObject(req.body)) {
+      const err = new Error('The req.body must be an Object!')
+      err.name = 'BodyError'
+      return next && next(err)
+    }
+    for (let fieldName in fieldTypeCheckers) {
+      const checker = fieldTypeCheckers[fieldName]
+      if (!_.isFunction(checker)) {
+        const err = new Error(`The checker for field \`${fieldName}\` is not a function!`)
+        err.name = 'CheckerError'
+        return next && next(err)
+      }
+      try {
+        result = checker(req.body, fieldName)
+      } catch (err) {
+        return next && next(err)
+      }
+      if (result) {
+        req.$bcResult = result
+        break
+      }
+    }
+    return next && next()
+  }
 }
 
-const defaultCallback = (req, res, next, fieldname, result) => {
-    req.status(400)
-    return res.json({
-        code: 400,
-        message: `Invalid type in the body, field ${fieldname}, result ${result}.`
-    })
-}
+bodyChecker.any = fieldTypes.any
+bodyChecker.array = fieldTypes.array
+bodyChecker.object = fieldTypes.object
+bodyChecker.bool = fieldTypes.boo
+bodyChecker.number = fieldTypes.number
+bodyChecker.string = fieldTypes.string
+bodyChecker.oneof = fieldTypes.oneof
+bodyChecker.oneoftype = fieldTypes.oneoftype
+bodyChecker.arrayof = fieldTypes.arrayof
+bodyChecker.objectof = fieldTypes.objectof
+bodyChecker.shapeof = fieldTypes.shapeof
 
-const bodychecker = (failedCallback, fieldOption) => {
-    if (!fieldOption || !_.isObject(fieldOption)) {
-        throw ERROR('OptionError', 'Invalid type of option, `object` expected!')
-    }
-    for (let fieldname in fieldOption) {
-        const checker = fieldOption[fieldname]
-        if (!checker || !_.isFunction(checker)) {
-            throw ERROR('CheckerError', 'Invalid type of checker, `function` expected!')
-        }
-    }
-    return (req, res, next) => {
-        const body = req.body
-        for (let fieldname in fieldOption) {
-            const checker = fieldOption[fieldname]
-            const result = checker(body, fieldname)
-            if (!_.isNull(result)) {
-                return failedCallback(req, res, next, fieldname, result)
-            }
-        }
-        next()
-    }
-}
-
-const expo = bodychecker.bind(null, defaultCallback)
-expo.FieldTypes = FieldTypes
-expo.failed = (cb) => bodychecker.bind(null, cb)
-
-module.exports = expo
+module.exports = bodyChecker
