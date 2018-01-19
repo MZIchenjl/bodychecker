@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - node
+before_install:
+  - npm i -g yarn
+script:
+  - yarn
+  - yarn test
+branches:
+  only:
+    - master
+deploy:
+  provider: npm
+  email: macchenjl@foxmail.com
+  api_key:
+    secure: xyHoViwddd3P/8spohs+EQwy2g8TYQmIE2Lv4wOhljEbEZNUuCXYdoICnyZabdkhZpLyThHgyJdQ0DL8yEn2v91RcIH0hG/tJZ2I2nakHKWr+oTdtV6mQP/r7RajsuPR9dHMESf5T3NAPMerhUrTaveUocJD7/Zj6fFXPeCkgQVGrBk3VySkWGyWRNn8I1yXP52TFh8SdsHZEbBCy6MlEj3iSeYxacioZlAZ5xSYaCQG1YMabcZe/Z2Wa/ZsqSB9XkoisFYrTdhHiQ7tpVmoegLChOLHWFZR7dhbIstEMJefhnJOuqvgbfEz2kTC6CTo0jf0LD2iWTGGaJjnAKkqq96ythqVPf+n4CBmXaiMfBvEZIQiIzbNf7C9W0X6d526oSbF/6Jt0YHaSEkZQZfp0C2Ys+XOwZPH7ktq6JmS8fwNnvCop//J32XV3y0229XlrbZGYreA81Z0+tWiwiTmurOHMp6qTf0PoSWVNGk96vey3dquPqiJc/rCs+sPrXmIMh7DOZNefuP3WDQRhxaf18E645nOCE40diIREVBpHLCf7cT0/CSXzLlsX43ZCdtw5MGds5K33L+aGfZ2hKRPfbQlXDuKhWejEW4eL7a+Bspj8Vfb0QrLq4G9iBaus3aGA42Tc5UsZ7wP/F5TSrzK9+zHV1qHxqCuizj+MB8OkHM=
+  on:
+    tags: true
+    repo: MZIchenjl/bodychecker
