@@ -82,6 +82,7 @@ describe('Test Bodychecker Results', () => {
   })
 
   afterEach(() => {
+    // server close
     server.close()
   })
 })
