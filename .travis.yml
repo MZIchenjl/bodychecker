@@ -6,9 +6,6 @@ before_install:
 script:
   - yarn
   - yarn test
-branches:
-  only:
-    - master
 deploy:
   provider: npm
   email: macchenjl@foxmail.com
@@ -17,3 +14,4 @@ deploy:
   on:
     tags: true
     repo: MZIchenjl/bodychecker
+    all_branches: true
