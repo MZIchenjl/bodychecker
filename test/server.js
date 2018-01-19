@@ -3,6 +3,7 @@ const http = require('http'),
   bodyparser = require('body-parser'),
   bodychecker = require('../index')
 
+// express app with simple methods
 const app = express()
 
 app.use(bodyparser.json())
