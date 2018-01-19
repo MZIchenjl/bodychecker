@@ -2,8 +2,8 @@ import * as express from 'express';
 
 declare namespace bodychecker {
     interface Result {
-        err_msg: string,
-        err_type: 'empty' | 'invalid',
+        message: string,
+        type: 'empty' | 'invalid',
         fieldpath: string,
         fieldvalue: any
     }

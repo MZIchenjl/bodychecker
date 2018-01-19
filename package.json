@@ -1,13 +1,13 @@
 {
     "name": "bodychecker",
-    "version": "0.9.3",
+    "version": "1.0.0",
     "description": "A middleware for express.js to check the request body.",
     "main": "index.js",
     "scripts": {
         "reset": "git clean -f && git checkout .",
         "prepack": "npx babel lib -d lib && babel index.js -o index.js",
         "postpublish": "npm run reset",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "mocha test/result.test.js"
     },
     "repository": {
         "type": "git",
@@ -32,6 +32,11 @@
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.0",
-        "babel-preset-env": "^1.6.1"
+        "babel-preset-env": "^1.6.1",
+        "body-parser": "^1.18.2",
+        "express": "^4.16.2",
+        "mocha": "^5.0.0",
+        "should": "^13.2.1",
+        "supertest": "^3.0.0"
     }
 }
