@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "reset": "git clean -f && git checkout .",
-        "prepack": "npx babel lib -d lib && babel index.js -o index.js",
+        "prepack": "npx babel-cli lib -d lib && babel index.js -o index.js",
         "postpublish": "npm run reset",
         "test": "mocha test/result.test.js"
     },
