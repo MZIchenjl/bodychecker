@@ -17,11 +17,13 @@ const responseHandler = (req, res, next) => {
   res.status(200).send('OK!')
 }
 
+// user login
 app.post('/user/login', bodychecker({
   username: bodychecker.string.isRequired,
   password: bodychecker.string.isRequired
 }), responseHandler)
 
+// user edit
 app.post('/user/edit', bodychecker({
   username: bodychecker.string.isRequired,
   password: bodychecker.string.isRequired,
