@@ -24,13 +24,13 @@ var bodychecker  = require('bodychecker')
 var app = express()
 
 app.post('/post/new', bodychecker({
-  title: bodychecker.string.isRequired,
-  author: bodychecker.string,
-  time: bodychecker.number,
-  content: bodychecker.string.isRequired
+    title: bodychecker.string.isRequired,
+    author: bodychecker.string,
+    time: bodychecker.number,
+    content: bodychecker.string.isRequired
 }), function (req, res, next) {
-  // req.$bcResult is the result of the bodycheck, which will be null if all the fields are valid
-  // place your awesome code
+    // req.$bcResult is the result of the bodycheck, which will be null if all the fields are valid
+    // place your awesome code
 })
 ```
 
