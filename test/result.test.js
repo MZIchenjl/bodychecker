@@ -1,13 +1,13 @@
-const server = require('./server'),
-  bodychecker = require('../index'),
-  supertest = require('supertest'),
-  should = require('should'),
-  assert = require('assert')
+var server = require('./server')
+var bodychecker = require('../index')
+var supertest = require('supertest')
+var should = require('should')
+var assert = require('assert')
 
-const client = supertest(server)
+var client = supertest(server)
 
-describe('Test Bodychecker Results', () => {
-  it('Valid POST data on /user/login', (done) => {
+describe('Test Bodychecker Results', function () {
+  it('Valid POST data on /user/login', function (done) {
     client.post('/user/login').send({
       username: 'mzi',
       password: 'happyhappycode'
@@ -15,7 +15,7 @@ describe('Test Bodychecker Results', () => {
       .expect(200, 'OK!', done)
   })
 
-  it('Invalid POST data on /user/login', (done) => {
+  it('Invalid POST data on /user/login', function (done) {
     client.post('/user/login').send({
       username: 'mzi',
       password: 123456
@@ -29,7 +29,7 @@ describe('Test Bodychecker Results', () => {
       }, done)
   })
 
-  it('Valid POST data on /user/edit', (done) => {
+  it('Valid POST data on /user/edit', function (done) {
     client.post('/user/edit').send({
       username: 'mzi',
       password: 'happyhappycode',
@@ -43,7 +43,7 @@ describe('Test Bodychecker Results', () => {
       .expect(200, 'OK!', done)
   })
 
-  it('Invalid POST data in arrayof on /user/edit', (done) => {
+  it('Invalid POST data in arrayof on /user/edit', function (done) {
     client.post('/user/edit').send({
       username: 'mzi',
       password: 'happyhappycode',
@@ -62,7 +62,7 @@ describe('Test Bodychecker Results', () => {
       }, done)
   })
 
-  it('Invalid POST data in shapeof on /user/edit', (done) => {
+  it('Invalid POST data in shapeof on /user/edit', function (done) {
     client.post('/user/edit').send({
       username: 'mzi',
       password: 'happyhappycode',
@@ -81,8 +81,7 @@ describe('Test Bodychecker Results', () => {
       }, done)
   })
 
-  afterEach(() => {
-    // server close
+  afterEach(function () {
     server.close()
   })
 })

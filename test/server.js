@@ -1,14 +1,13 @@
-const http = require('http'),
-  express = require('express'),
-  bodyparser = require('body-parser'),
-  bodychecker = require('../index')
+var http = require('http')
+var express = require('express')
+var bodyparser = require('body-parser')
+var bodychecker = require('../index')
 
-// express app with simple methods
-const app = express()
+var app = express()
 
 app.use(bodyparser.json())
 
-const responseHandler = (req, res, next) => {
+var responseHandler = function (req, res, next) {
   console.info(`${req.method} - ${req.path}`)
   if (req.$bcResult) {
     console.log(`req.$bcResult = ${JSON.stringify(req.$bcResult)}`)
@@ -38,7 +37,7 @@ app.post('/user/edit', bodychecker({
   })
 }), responseHandler)
 
-const server = http.createServer(app)
+var server = http.createServer(app)
 
 module.exports = server
 
