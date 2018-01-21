@@ -1,11 +1,11 @@
 {
     "name": "bodychecker",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A middleware for express.js to check the request body.",
     "main": "index.js",
     "scripts": {
         "reset": "git clean -f && git checkout .",
-        "prepack": "npx babel-cli lib -d lib && babel-cli index.js -o index.js",
+        "prepack": "babel lib -d lib && babel index.js -o index.js",
         "postpublish": "npm run reset",
         "test": "mocha test/result.test.js"
     },
