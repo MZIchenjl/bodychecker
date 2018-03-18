@@ -9,4 +9,3 @@ before_install:
 script:
   - yarn
   - yarn test
-  
